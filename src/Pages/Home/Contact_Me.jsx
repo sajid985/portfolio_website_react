@@ -1,29 +1,59 @@
+import { useState } from "react";
+
 export default function Contact_Me() {
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        message: "",
+      })
+
+    const handleChange = (e) => {
+        setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        setTimeout(() => setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        message: "",
+        }), 100);
+    };
     return (
       <section id="Contact" className="contact--section">
         <div>
           <p className="sub--title">Get In Touch</p>
           <h2>Contact Me</h2>
         </div>
-        <form action="https://formspree.io/f/xyzkwedb" className="contact--form--container" method="post">
+        <form action="https://formspree.io/f/xyzkwedb" className="contact--form--container" method="post" onSubmit={handleSubmit}>
           <div className="container">
-            <label htmlFor="first-name" className="contact--label">
+            <label htmlFor="firstName" className="contact--label">
               <span className="text-md">First Name</span>
               <input
                 type="text"
                 className="contact--input text-md"
-                name="first-name"
-                id="first-name"
+                name="firstName"
+                id="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
                 required
               />
             </label>
-            <label htmlFor="last-name" className="contact--label">
+            <label htmlFor="lastName" className="contact--label">
               <span className="text-md">Last Name</span>
               <input
                 type="text"
                 className="contact--input text-md"
-                name="last-name"
-                id="last-name"
+                name="lastName"
+                id="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
                 required
               />
             </label>
@@ -34,16 +64,20 @@ export default function Contact_Me() {
                 className="contact--input text-md"
                 name="email"
                 id="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </label>
-            <label htmlFor="phone-number" className="contact--label">
-              <span className="text-md">phone-number</span>
+            <label htmlFor="phoneNumber" className="contact--label">
+              <span className="text-md">Phone Number</span>
               <input
                 type="number"
                 className="contact--input text-md"
-                name="phone-number"
+                name="phoneNumber"
                 id="phone-number"
+                value={formData.phoneNumber}
+                onChange={handleChange}
                 required
               />
             </label>
@@ -60,11 +94,13 @@ export default function Contact_Me() {
           <label htmlFor="message" className="contact--label">
             <span className="text-md">Message</span>
             <textarea
-              className="contact--input text-md"
-              id="message"
-              name="message"
-              rows="8"
-              placeholder="Type your message..."
+                className="contact--input text-md"
+                id="message"
+                name="message"
+                rows="8"
+                placeholder="Type your message..."
+                value={formData.message}
+                onChange={handleChange}
             />
           </label>
           <label htmlFor="checkboc" className="checkbox--label">
